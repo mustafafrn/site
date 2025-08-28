@@ -1,0 +1,418 @@
+<!doctype html>
+  <html lang="tr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Teurny.com Teknik Teslim ve Doğrulama Raporu</title>
+    <style>
+    :root {
+      --accent: #0d6efd;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    @page {
+      size: A4;
+      margin: 20mm 16mm 24mm 16mm;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif; color: var(--text); line-height: 1.6; }
+    h1, h2, h3 { color: #111827; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 20px; margin-top: 24px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    h3 { font-size: 16px; margin-top: 18px; }
+    p { margin: 8px 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px; }
+    pre { background: #0b1020; color: #d1e9ff; border-radius: 8px; padding: 12px 14px; overflow-x: auto; border: 1px solid #0d1b2a; }
+    pre code { background: transparent; padding: 0; }
+    code { background: #f3f4f6; color: #111827; padding: 1px 4px; border-radius: 4px; }
+    blockquote { border-left: 3px solid var(--accent); margin: 8px 0; padding: 6px 12px; color: var(--muted); background: #f8fafc; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; }
+    th, td { border: 1px solid var(--border); padding: 8px; font-size: 12px; }
+    th { background: #f8fafc; text-align: left; }
+    ul { margin: 6px 0 6px 20px; }
+    .doc-title { display:flex; align-items:center; justify-content:space-between; padding-bottom: 8px; border-bottom: 2px solid var(--border); margin-bottom: 10px; }
+    .brand { font-size: 13px; color: var(--muted); }
+    .chip { border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; font-size: 11px; color: var(--muted); }
+    .toc { border: 1px solid var(--border); border-radius: 12px; padding: 10px; background: #ffffff; margin: 10px 0 16px; }
+    .toc h3 { margin: 0 0 6px; font-size: 14px; }
+    .toc a { text-decoration: none; color: var(--accent); }
+    .footer { font-size: 10px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 16px; padding-top: 6px; }
+  </style>
+  </head>
+  <body>
+    <div class="doc-title">
+      <div>
+        <h1>Teurny.com Teknik Teslim ve Doğrulama Raporu</h1>
+        <div class="brand">Rapor tarihi: 28.08.2025</div>
+      </div>
+      <div class="chip">Gizli • İç Kullanım</div>
+    </div>
+    <h2>Teurny.com Teknik Teslim ve Doğrulama Raporu</h2>
+<p>Tarih: 28.08.2025
+Kapsam: Sunucu hizmeti, admin paneli teslim dokümantasyonu, SEO teknik raporlama, veri takibi ve dashboard doğrulamaları, güvenlik uygulamaları ve test sonuçları.</p>
+<p>Alan Adı: teurny.com
+Çözünürlük (DNS): 178.157.15.22 (rDNS: srv.teurny.com)</p>
+<hr>
+<h3>1) Sunucu Hizmeti Kapsamında Beklenen Raporlar</h3>
+<h4>1.1 Sunucu sağlayıcısı, işletim sistemi, IP ve donanım konfigürasyonu</h4>
+<table>
+<thead>
+<tr>
+<th>Öğe</th>
+<th>Değer</th>
+<th>Durum/Eylem</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Sunucu Sağlayıcısı</td>
+<td>Tespit edilmedi</td>
+<td>Sağlayıcı adı ve panel ekran görüntüsü eklenecek</td>
+</tr>
+<tr>
+<td>İşletim Sistemi</td>
+<td>Muhtemelen Linux (Nginx 1.14.1 çalışıyor)</td>
+<td>Kesin sürüm için <code>lsb_release -a</code>/<code>cat /etc/os-release</code> çıktısı eklenecek</td>
+</tr>
+<tr>
+<td>Genel IP</td>
+<td>178.157.15.22</td>
+<td>Doğrulandı (getent)</td>
+</tr>
+<tr>
+<td>rDNS</td>
+<td>srv.teurny.com</td>
+<td>Doğrulandı</td>
+</tr>
+<tr>
+<td>CPU/RAM/Disk</td>
+<td>Tespit edilmedi</td>
+<td>Sağlayıcı paneli veya <code>lscpu</code>, <code>free -h</code>, <code>lsblk</code> çıktıları eklenecek</td>
+</tr>
+<tr>
+<td>Sanallaştırma</td>
+<td>Tespit edilmedi</td>
+<td><code>systemd-detect-virt</code> çıktısı eklenecek</td>
+</tr>
+</tbody></table>
+<p>Not: HTTP→HTTPS 301 yönlendirme etkin. HSTS başlığı gözlenmedi (aşağıda detaylar).</p>
+<h4>1.2 Sunucuda kurulu servislerin listesi</h4>
+<ul>
+<li>Web Sunucusu: Nginx 1.14.1 (Header: <code>Server: nginx/1.14.1</code>)</li>
+<li>Uygulama Çatısı: Django (kanıt: <code>csrftoken</code> çerezi, <code>Vary: Cookie</code>)</li>
+<li>TLS/SSL: Sectigo DV sertifika (SAN: teurny.com, <a href="http://www.teurny.com">www.teurny.com</a>)</li>
+<li>Veritabanı: Tespit edilmedi (PostgreSQL/MySQL bilgisi eklenecek)</li>
+<li>Önbellek/Sıra: Tespit edilmedi (Redis/Celery varsa eklenecek)</li>
+<li>Günlükleme/Monitoring: Tespit edilmedi (Prometheus/Grafana/ELK varsa eklenecek)</li>
+</ul>
+<p>Kanıt/Komut Önerileri:</p>
+<ul>
+<li><code>nginx -V</code> çıkışı</li>
+<li><code>python -m django --version</code> veya uygulama <code>requirements.txt</code></li>
+<li><code>systemctl --type=service --state=running</code></li>
+<li>Veritabanı sürümü: <code>psql --version</code> veya <code>mysql --version</code></li>
+</ul>
+<h4>1.3 SSH erişimi ve yönetim paneli bilgileri</h4>
+<ul>
+<li>SSH Erişimi: [Sağlanacak]<ul>
+<li>Yetkili IP aralıkları (CIDR): [xxx]</li>
+<li>Kimlik doğrulama: Anahtar temelli (önerilir) / Parola kapalı</li>
+<li>Anahtar parmak izi: [SHA256:…]</li>
+<li>Fail2ban/UFW politikası: [özet]</li>
+</ul>
+</li>
+<li>Yönetim Paneli: [Sağlayıcı panel adı/URL]<ul>
+<li>Kullanıcı rolleri ve erişim seviyeleri: [özet]</li>
+<li>Kritik işlemler için 2FA: [aktif/pasif]</li>
+</ul>
+</li>
+</ul>
+<h4>1.4 Otomatik yedekleme konfigürasyonları ve kanıtlar</h4>
+<table>
+<thead>
+<tr>
+<th>Kapsam</th>
+<th>Sıklık</th>
+<th>Saklama</th>
+<th>Hedef</th>
+<th>Şifreleme</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Veritabanı</td>
+<td>[günlük/saatlik]</td>
+<td>[x gün]</td>
+<td>[S3/Backblaze/FTP/NFS]</td>
+<td>[AES256/KMS]</td>
+</tr>
+<tr>
+<td>Medya/Statik</td>
+<td>[günlük/haftalık]</td>
+<td>[x gün]</td>
+<td>[hedef]</td>
+<td>[var/yok]</td>
+</tr>
+<tr>
+<td>Uygulama Yapılandırması</td>
+<td>[haftalık]</td>
+<td>[x hafta]</td>
+<td>[hedef]</td>
+<td>[var/yok]</td>
+</tr>
+</tbody></table>
+<p>Kanıtlar: Yedekleme job ekran görüntüleri, son başarılı koşum tarihi/süresi, log kesitleri. [EK-A]</p>
+<h4>1.5 Yedekleme testleri ve geri yükleme prosedürleri</h4>
+<ul>
+<li>Test Tarihi/ID: [yyyy-mm-dd / run-###]</li>
+<li>Test Kapsamı: [veritabanı / medya / tam geri yükleme]</li>
+<li>Prosedür: [adım adım]</li>
+<li>Sonuç: [başarılı/başarısız], Süre: [dk]</li>
+<li>Kanıt: Ekran görüntüleri ve loglar. [EK-A]</li>
+</ul>
+<h4>1.6 Güvenlik duvarı kuralları ve erişim kontrol listeleri</h4>
+<p>Örnek Özet (güncel konfigürasyon eklenecek):</p>
+<ul>
+<li>Inbound: 22/tcp (yalnızca ofis/bastion IP), 80/tcp, 443/tcp açık; diğerleri kapalı</li>
+<li>Outbound: Varsayılan izinli, kritik port kısıtlamaları uygulanmış</li>
+<li>WAF/CDN: [Varsa sağlayıcı ve kurallar]</li>
+<li>Sunucu: UFW/iptables çıktıları [EK-B]</li>
+</ul>
+<h4>1.7 Uptime performansı ve log yönetimi</h4>
+<ul>
+<li>SLA/Hedef: 99.9% aylık uptime</li>
+<li>İzleme: [UptimeRobot/StatusCake/CloudWatch] görünürlük ve son 30 gün raporu [EK-C]</li>
+<li>Log Yönetimi: Nginx (<code>/var/log/nginx/*</code>), Uygulama (Django) ve Sistem loglarının rotasyonu (logrotate) ve saklama politikası</li>
+</ul>
+<hr>
+<h3>2) Web Sitesi Admin Paneli Teslim Belgeleri</h3>
+<h4>2.1 Geliştirilmiş panelin ekran görüntüleri</h4>
+<ul>
+<li>Eklenecek: Giriş, Dashboard, Kullanıcı Yönetimi, İçerik Yönetimi, Ayarlar, Raporlar [EK-D]</li>
+</ul>
+<h4>2.2 Kullanıcı seviyeleri ve yetkilendirme</h4>
+<p>Örnek Rol Yapısı (güncel uygulamaya göre güncellenecek):</p>
+<ul>
+<li>Admin: Tüm yetkiler, RBAC yönetimi</li>
+<li>Editör: İçerik oluşturma/düzenleme/yayınlama</li>
+<li>Moderatör: Yorum/rapor yönetimi</li>
+<li>Destek: Sınırlı kullanıcı işlemleri</li>
+<li>Görüntüleyici: Salt-okunur raporlar</li>
+</ul>
+<p>Kanıt: Rol matris ekran görüntüsü ve örnek kullanıcı hesapları [EK-D]</p>
+<h4>2.3 Admin panel işlevsel alanlar dökümü</h4>
+<ul>
+<li>İçerik: Blog/Sayfa oluşturma, durum yönetimi, planlama</li>
+<li>Kullanıcılar: Arama, filtre, yetki atama, parola sıfırlama</li>
+<li>Onay/Moderasyon: Yorumlar, sorular, bildirimler</li>
+<li>Analitik: Trafik ve etkileşim panelleri (varsa)</li>
+<li>Ayarlar: Site ayarları, SEO alanları, entegrasyon anahtarları</li>
+</ul>
+<h4>2.4 RBAC ve iki faktörlü kimlik doğrulama (2FA)</h4>
+<ul>
+<li>RBAC: [Aktif/Pasif] – politika ve kural örnekleri eklenecek</li>
+<li>2FA: [Aktif/Pasif] – oturum açma akışı ekran görüntüleri [EK-D]</li>
+</ul>
+<h4>2.5 Panelde görüntülenebilen özel metrikler, event’ler ve segment örnekleri</h4>
+<ul>
+<li>Metrikler: [ör. günlük aktif kullanıcı, içerik etkileşimi]</li>
+<li>Event’ler: [ör. içerik yayınlandı, yorum onaylandı]</li>
+<li>Segmentler: [ör. yeni kullanıcılar, sadık okuyucular]</li>
+<li>Kanıt: Panel ekran görüntüleri [EK-D]</li>
+</ul>
+<hr>
+<h3>3) SEO Danışmanlığına İlişkin Teknik Raporlama</h3>
+<h4>3.1 Teknik analiz (öncesi/sonrası)</h4>
+<ul>
+<li>Araçlar: Screaming Frog, GTmetrix, PageSpeed Insights</li>
+<li>Öncesi/sonrası kıyas: Tarama hataları, kırık linkler, yönlendirmeler, performans skorları [EK-E]</li>
+</ul>
+<h4>3.2 Meta başlık, açıklama, URL yapısı</h4>
+<ul>
+<li>Ana sayfa meta açıklama: VAR</li>
+</ul>
+<pre><code class="language-html">&lt;meta name=&quot;description&quot; content=&quot;Teurny, cinsel sağlık ve ilişkiler üzerine bilgilendirici içerikler sunan, merak ettiklerinizi sorabileceğiniz bir platformdur.&quot;&gt;
+</code></pre>
+<ul>
+<li>Canonical etiketi: Tespit edilmedi (eklenmesi önerilir)</li>
+<li>Open Graph/Twitter kart etiketleri: Tespit edilmedi (eklenmesi önerilir)</li>
+</ul>
+<h4>3.3 Alt etiket güncellemeleri, Open Graph entegrasyon örnekleri</h4>
+<ul>
+<li>IMG alt etiket taraması: [Screaming Frog raporu eklenecek]</li>
+<li>Örnek OG etiketleri (öneri):</li>
+</ul>
+<pre><code class="language-html">&lt;meta property=&quot;og:title&quot; content=&quot;Teurny&quot; /&gt;
+&lt;meta property=&quot;og:description&quot; content=&quot;Cinsel sağlık ve ilişkiler üzerine içerikler.&quot; /&gt;
+&lt;meta property=&quot;og:url&quot; content=&quot;https://teurny.com/&quot; /&gt;
+&lt;meta property=&quot;og:image&quot; content=&quot;https://teurny.com/static/og-image.jpg&quot; /&gt;
+&lt;meta name=&quot;twitter:card&quot; content=&quot;summary_large_image&quot; /&gt;
+</code></pre>
+<h4>3.4 Sitemap, robots.txt, canonical dosyaları</h4>
+<ul>
+<li>robots.txt: VAR</li>
+</ul>
+<pre><code class="language-txt">User-agent: *
+Disallow: /admin-panel-2025-teurny/
+Disallow: /profil/
+Disallow: /confirm/
+Disallow: /login/
+... (devamı için EK-F)
+</code></pre>
+<ul>
+<li>sitemap.xml: VAR (çoklu URL girdileri mevcut)</li>
+<li>canonical: Tespit edilmedi (sayfa bazında eklenmesi önerilir)</li>
+</ul>
+<h4>3.5 Sayfa hızı testleri (öncesi/sonrası)</h4>
+<ul>
+<li>Mobil/Masaüstü PSI puanları: [öncesi/sonrası tablo eklenecek]</li>
+<li>Ana darboğazlar: [LCP/CLS/JS boyutu/resim optimizasyonu]</li>
+<li>Aksiyonlar: HTTP/2/3, gzip/brotli, resim lazyload, kritik CSS, cache-policy</li>
+</ul>
+<hr>
+<h3>4) Veri Takibi, Dashboard ve Event Takip Raporlaması</h3>
+<h4>4.1 Entegrasyon doğrulamaları</h4>
+<ul>
+<li>Google Analytics 4: VAR (Measurement ID: G-LTGWSXFV4Z)</li>
+<li>Google Tag Manager: VAR (Container ID: GTM-WFW9SKHK)</li>
+<li>Meta (Facebook) Pixel: VAR (Pixel ID: 881173250747037)</li>
+<li>Hotjar: Tespit edilmedi</li>
+<li>Yandex Metrica: Tespit edilmedi</li>
+</ul>
+<p>Kanıt: HTML kaynakta ilgili script referansları [EK-G]</p>
+<h4>4.2 Google Tag Manager erişimi ve yapılandırma</h4>
+<ul>
+<li>Erişim: [e-posta listesi]</li>
+<li>Yayınlanan sürüm: [vX, tarih]</li>
+<li>Event listesi: [custom event adları]</li>
+<li>Tetikleyiciler: [sayfa görüntüleme, tıklama, form gönderimi]</li>
+<li>Değişkenler: [dataLayer alanları]</li>
+</ul>
+<h4>4.3 Django tabanlı özel dashboardlar</h4>
+<ul>
+<li>Dashboard URL’leri ve yetkiler: [liste]</li>
+<li>Ekran görüntüleri ve metrik tanımları: [EK-H]</li>
+</ul>
+<h4>4.4 Takip edilen özel metrik, event ve segment tanımları</h4>
+<ul>
+<li>Metrik tanımı şablonu: Ad, ölçüm yöntemi, kaynak, güncelleme sıklığı, sahip</li>
+<li>Event şeması: Ad, parametreler, tetikleyici, GTM kuralı, GA4 mapping</li>
+<li>Segmentler: Dahil/dahil değil kuralları, örnek kullanıcı sayısı</li>
+</ul>
+<h4>4.5 Veri görünürlüğü, kaynaklar ve tazelik</h4>
+<ul>
+<li>Panelde görülen veriler: [liste]</li>
+<li>Kaynak sistemler: [GA4/GTM, uygulama DB, loglar]</li>
+<li>Güncelleme sıklığı: [realtime/saatlik/günlük]</li>
+</ul>
+<h4>4.6 Custom segment oluşturma örneği (GA4)</h4>
+<ol>
+<li>GTM&#39;de <code>custom_event</code> tetikleyici tanımla (event name: <code>cta_click</code>)</li>
+<li>GA4&#39;te <code>Explore &gt; Segments</code> ile koşul: <code>event_name = cta_click</code> ve <code>page_location CONTAINS /blog/</code></li>
+<li>Sonuç grafikleri ve sayıları ekran görüntüsü [EK-H]</li>
+</ol>
+<h4>4.7 Veri akış kontrolleri ve onay (consent) yönetimi</h4>
+<ul>
+<li>CMP/Çerez onayı: [Varsa ürün adı ve sürüm]</li>
+<li>GA4/GTM consent_mode: [aktif/pasif]</li>
+<li>Bölgesel uyumluluk: GDPR/KVKK akış çizimi ve log kanıtları [EK-I]</li>
+</ul>
+<hr>
+<h3>5) Güvenlik Uygulamaları ve Test Sonuçları</h3>
+<h4>5.1 CSRF, JWT, OAuth2, HTTPS, SSL, şifreleme, kimlik doğrulama</h4>
+<ul>
+<li>CSRF: VAR (çerez: <code>csrftoken</code>)</li>
+<li>HTTPS: VAR (HTTP→HTTPS 301); HSTS: Tespit edilmedi (önerilir)</li>
+<li>SSL Sertifika: Sectigo RSA DV (Geçerlilik: 2025-03-30 → 2026-03-30)</li>
+<li>SAN: teurny.com, <a href="http://www.teurny.com">www.teurny.com</a></li>
+<li>JWT/OAuth2: Tespit edilmedi (varsa kanıt eklenecek)</li>
+<li>Parola politikaları/Şifreleme: [belirtilecek]</li>
+</ul>
+<h4>5.2 Django güvenlik ayarları çıktıları</h4>
+<p>Gözlemlenen HTTP başlıkları:</p>
+<ul>
+<li>X-Frame-Options: DENY (VAR)</li>
+<li>X-Content-Type-Options: nosniff (VAR)</li>
+<li>Referrer-Policy: same-origin (VAR)</li>
+<li>Cross-Origin-Opener-Policy: same-origin (VAR)</li>
+<li>Strict-Transport-Security: Tespit edilmedi (önerilir)</li>
+<li>Content-Security-Policy: Tespit edilmedi (önerilir)</li>
+<li>Permissions-Policy: Tespit edilmedi (önerilir)</li>
+</ul>
+<p>Önerilen Django ayarları:</p>
+<ul>
+<li><code>SECURE_HSTS_SECONDS</code> (örn. 31536000), <code>SECURE_HSTS_INCLUDE_SUBDOMAINS</code>, <code>SECURE_HSTS_PRELOAD</code></li>
+<li><code>SECURE_SSL_REDIRECT = True</code></li>
+<li><code>SESSION_COOKIE_SECURE = True</code>, <code>CSRF_COOKIE_SECURE = True</code></li>
+<li><code>SECURE_REFERRER_POLICY = &quot;same-origin&quot;</code> (mevcut)</li>
+<li>CSP ve Permissions-Policy başlıklarının eklenmesi</li>
+</ul>
+<h4>5.3 Güvenlik duvarı, DDoS koruması ve saldırı önleme</h4>
+<ul>
+<li>Sunucu FW: [UFW/iptables çıktısı]</li>
+<li>WAF/CDN: [Cloudflare/AWS WAF vb.]</li>
+<li>DDoS/Rate limit: [Nginx rate-limit/Fail2ban konfigürasyonu]</li>
+</ul>
+<h4>5.4 Penetrasyon testleri, hata logları, açık yönetimi</h4>
+<ul>
+<li>Pentest: [Tarih, kapsam, yöntem, bulgu özeti]</li>
+<li>Hata Logları: [özet istatistik ve kritik örnekler]</li>
+<li>Açık/Müdahale Raporları: [CVE referansları ve kapatma tarihleri]</li>
+</ul>
+<hr>
+<h3>EKLER (Kanıtlar)</h3>
+<p>EK-A) Yedekleme ekran görüntüleri ve log özetleri</p>
+<p>EK-B) Güvenlik duvarı çıktıları (sunucu ve/veya bulut sağlayıcı)</p>
+<p>EK-C) Uptime raporları (son 30 gün) ve olay zaman çizelgesi</p>
+<p>EK-D) Admin panel ekran görüntüleri (giriş, dashboard, kullanıcı/rol, ayarlar)</p>
+<p>EK-E) Teknik analiz raporları (Screaming Frog, GTmetrix, PSI önce/sonra)</p>
+<p>EK-F) robots.txt (özet)</p>
+<pre><code class="language-txt">User-agent: *
+Disallow: /admin-panel-2025-teurny/
+Disallow: /profil/
+Disallow: /confirm/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /register/
+... (tam içerik için sistem çıktısına bakınız)
+</code></pre>
+<p>EK-G) Sitemap örnek girdileri</p>
+<pre><code class="language-xml">&lt;url&gt;&lt;loc&gt;https://teurny.com/blog/kendinize-kucuk-sozler-verin-buyuk-sonuclar-alin/&lt;/loc&gt;&lt;/url&gt;
+&lt;url&gt;&lt;loc&gt;https://teurny.com/&lt;/loc&gt;&lt;/url&gt;
+</code></pre>
+<p>EK-H) Analitik entegrasyon bulguları (HTML kaynak kesitleri)</p>
+<pre><code class="language-html">&lt;!-- GA4 --&gt;
+&lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=G-LTGWSXFV4Z&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);} gtag(&#39;js&#39;, new Date());
+  gtag(&#39;config&#39;, &#39;G-LTGWSXFV4Z&#39;);
+&lt;/script&gt;
+&lt;!-- GTM --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({&#39;gtm.start&#39;:new Date().getTime(),event:&#39;gtm.js&#39;});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!=&#39;dataLayer&#39;?&#39;&amp;l=&#39;+l:&#39;&#39;;j.async=true;j.src=&#39;https://www.googletagmanager.com/gtm.js?id=&#39;+i+dl;f.parentNode.insertBefore(j,f);})(window,document,&#39;script&#39;,&#39;dataLayer&#39;,&#39;GTM-WFW9SKHK&#39;);&lt;/script&gt;
+&lt;!-- Meta Pixel --&gt;
+&lt;script src=&quot;https://connect.facebook.net/en_US/fbevents.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>EK-I) HTTP başlıkları (özet)</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Server: nginx/1.14.1
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+Set-Cookie: csrftoken=...
+</code></pre>
+<p>EK-J) TLS Sertifika Özeti</p>
+<pre><code>Issuer: Sectigo RSA Domain Validation Secure Server CA
+Subject: CN=teurny.com
+Valid: 2025-03-30 → 2026-03-30
+SAN: teurny.com, www.teurny.com
+</code></pre>
+<hr>
+<h3>Revizyon Geçmişi</h3>
+<ul>
+<li>28.08.2025: İlk rapor oluşturuldu; alan bulguları işlendi, kanıt yer tutucuları eklendi.</li>
+</ul>
+
+    <div class="footer">Bu rapor Teurny.com için hazırlanmıştır. Otomatik oluşturma: Node + Puppeteer.</div>
+  </body>
+  </html>
